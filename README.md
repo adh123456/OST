@@ -1,0 +1,2 @@
+# OST
+Offline Sanskrit Transliterator
