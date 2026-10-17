@@ -1,0 +1,4 @@
+C:\Users\adhyatma\Documents\Digital Library\Sanskrit_Books\Sanscript Off-line\OTT\Publish\Microsoft.Web.WebView2.Core.xml
+C:\Users\adhyatma\Documents\Digital Library\Sanskrit_Books\Sanscript Off-line\OTT\Publish\Microsoft.Web.WebView2.WinForms.xml
+C:\Users\adhyatma\Documents\Digital Library\Sanskrit_Books\Sanscript Off-line\OTT\Publish\Microsoft.Web.WebView2.Wpf.xml
+C:\Users\adhyatma\Documents\Digital Library\Sanskrit_Books\Sanscript Off-line\OTT\Publish\Offline Transliteration Tool.exe

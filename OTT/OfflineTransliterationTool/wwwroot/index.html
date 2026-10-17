@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offline Transliteration Tool</title>
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+
+  <header class="app-header">
+    <div class="brand-group">
+      <div class="brand-logo" aria-hidden="true">&#x0905;</div>
+      <h1 class="app-title">Offline Transliteration Tool</h1>
+    </div>
+
+    <div class="header-controls">
+      <label class="pill-toggle" title="Automatically transliterate as you type">
+        <input type="checkbox" id="autoMode" checked>
+        <span>Live Typing</span>
+      </label>
+
+      <label class="pill-toggle" title="Synchronize scrolling between Input and Output boxes">
+        <input type="checkbox" id="syncScroll" checked>
+        <span>Sync Scroll</span>
+      </label>
+
+      <div class="font-controls" title="Adjust text box font size">
+        <button type="button" id="fontDecBtn" class="icon-btn-sm">A-</button>
+        <span id="fontSizeLabel">18px</span>
+        <button type="button" id="fontIncBtn" class="icon-btn-sm">A+</button>
+      </div>
+
+      <button type="button" id="mapBtn" class="header-btn" title="View Transliteration Character Map">
+        <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none">
+          <rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M8 12h.01M12 12h.01M16 12h.01M7 16h10"/>
+        </svg>
+        <span>Character Map</span>
+      </button>
+
+      <button type="button" id="helpBtn" class="header-btn" title="Syntax & Usage Guide">
+        <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none">
+          <circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+        <span>Guide</span>
+      </button>
+
+      <button type="button" id="settingsBtn" class="header-btn settings-gear-btn" title="Settings & Script Selection">
+        <svg viewBox="0 0 24 24" width="19" height="19" stroke="currentColor" stroke-width="2" fill="none">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <section class="pane input-pane">
+      <div class="pane-toolbar">
+        <div class="selector-group">
+          <label for="inputSelect" class="pane-label">Input:</label>
+          <select id="inputSelect" class="script-select" title="Choose your input format"></select>
+          <span id="detectedBadge" class="detected-badge hidden"></span>
+        </div>
+
+        <div class="pane-actions">
+          <button type="button" id="pasteInputBtn" class="action-icon-btn" title="Paste from clipboard">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none">
+              <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
+            </svg>
+            <span>Paste</span>
+          </button>
+          <button type="button" id="clearInputBtn" class="action-icon-btn" title="Clear input text">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none">
+              <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+            <span>Clear</span>
+          </button>
+          <button type="button" id="copyInputBtn" class="action-icon-btn copy-btn" title="Copy all input text (with Word font formatting)">
+            <svg class="copy-svg" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+            </svg>
+            <span class="btn-text">Copy</span>
+          </button>
+        </div>
+      </div>
+
+      <textarea id="inputText" class="editor-box input-box" placeholder="Type or paste your text here..." spellcheck="false"></textarea>
+
+      <div class="pane-footer">
+        <span id="inputStats">0 chars | 0 lines</span>
+      </div>
+    </section>
+
+    <div class="center-controls">
+      <button type="button" id="swapBtn" class="swap-btn" title="Swap Input and Output scripts and text">
+        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none">
+          <polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/>
+          <polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/>
+        </svg>
+      </button>
+      <button type="button" id="runBtn" class="run-btn hidden" title="Click to transliterate">&#x27A0;</button>
+    </div>
+
+    <section class="pane output-pane">
+      <div class="pane-toolbar">
+        <div class="selector-group">
+          <label for="outputSelect" class="pane-label">Output:</label>
+          <select id="outputSelect" class="script-select" title="Choose your output format"></select>
+
+          <label class="dual-toggle" title="Stack a second output script below each stanza or line">
+            <input type="checkbox" id="dualModeCheck">
+            <span>+ 2nd Script:</span>
+          </label>
+          <select id="secondaryOutputSelect" class="script-select secondary-select hidden" title="Choose secondary stacked script"></select>
+        </div>
+
+        <div class="pane-actions">
+          <button type="button" id="downloadOutputBtn" class="action-icon-btn" title="Save output as a .txt file">
+            <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            <span>Save .txt</span>
+          </button>
+          <button type="button" id="copyOutputBtn" class="action-icon-btn copy-btn" title="Copy all output text (with Word font formatting)">
+            <svg class="copy-svg" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+            </svg>
+            <span class="btn-text">Copy</span>
+          </button>
+        </div>
+      </div>
+
+      <textarea id="outputText" class="editor-box output-box" placeholder="Transliterated output will appear here (Read-Only)..." readonly aria-readonly="true" spellcheck="false"></textarea>
+
+      <div class="pane-footer">
+        <span id="outputStats">0 chars | 0 lines</span>
+        <span id="modeIndicator" class="mode-indicator">Mode: Sanskrit (&#x0905;&#x091C;&#x092F;&#x094D;)</span>
+      </div>
+    </section>
+  </main>
+
+  <div id="settingsModal" class="modal-backdrop hidden">
+    <div class="modal-card modal-lg">
+      <div class="modal-header">
+        <h2>Settings &amp; Script Preferences</h2>
+        <button type="button" class="modal-close" data-close="settingsModal">&#x2715;</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="settings-section">
+          <h3>General Transliteration Behavior</h3>
+
+          <div class="setting-row">
+            <div class="setting-info">
+              <strong>Display 'Auto-Detect Script' in Input Box</strong>
+              <p>Adds an 'Auto-Detect Script' option to the Input dropdown that identifies scripts automatically.</p>
+            </div>
+            <select id="settingAutoDetect" class="setting-dropdown">
+              <option value="no" selected>No (Default)</option>
+              <option value="yes">Yes</option>
+            </select>
+          </div>
+
+          <div class="setting-row">
+            <div class="setting-info">
+              <strong>Devanagari / Indic Ending Mode (Schwa Syncope)</strong>
+              <p>Choose whether final consonants retain the Sanskrit vir&#x0101;ma (&#x0905;&#x091C;&#x092F;&#x094D;) or drop it as in Hindi/Marathi (&#x0905;&#x091C;&#x092F;).</p>
+            </div>
+            <select id="settingSyncope" class="setting-dropdown">
+              <option value="0" selected>Sanskrit Style (ajay &#x27A0; &#x0905;&#x091C;&#x092F;&#x094D;)</option>
+              <option value="1">Hindi / Marathi Style (ajay &#x27A0; &#x0905;&#x091C;&#x092F;)</option>
+            </select>
+          </div>
+
+          <div class="setting-row">
+            <div class="setting-info">
+              <strong>Dual-Script Output Grouping</strong>
+              <p>When using 'Devanagari + IAST' or '+ 2nd Script', choose how the two scripts are interleaved.</p>
+            </div>
+            <select id="settingDualGrouping" class="setting-dropdown">
+              <option value="stanza" selected>Stanza-by-Stanza (Grouped by blank lines)</option>
+              <option value="line">Line-by-Line (Every single line)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <h3>Word Export &amp; Rich-Text Copy Fonts</h3>
+
+          <div class="setting-row">
+            <div class="setting-info">
+              <strong>Preferred Font for Brahmic / Indic Scripts</strong>
+              <p>Applied automatically when copying Devanagari, Bengali, Odia, Malayalam, etc. into Microsoft Word.</p>
+            </div>
+            <select id="settingBrahmicFont" class="setting-dropdown">
+              <option value="Mangal" selected>Mangal (Default)</option>
+              <option value="Nirmala UI">Nirmala UI</option>
+              <option value="Siddhanta">Siddhanta</option>
+              <option value="Sanskrit 2003">Sanskrit 2003</option>
+              <option value="Kokila">Kokila</option>
+              <option value="Aparajita">Aparajita</option>
+              <option value="Noto Sans Devanagari">Noto Sans Devanagari</option>
+              <option value="Utsaah">Utsaah</option>
+            </select>
+          </div>
+
+          <div class="setting-row">
+            <div class="setting-info">
+              <strong>Preferred Font for Roman / Diacritic Scripts</strong>
+              <p>Applied automatically when copying IAST, ITRANS, HK, SLP1, Velthuis, or WX into Microsoft Word.</p>
+            </div>
+            <select id="settingRomanFont" class="setting-dropdown">
+              <option value="Calibri" selected>Calibri (Default)</option>
+              <option value="Times New Roman">Times New Roman</option>
+              <option value="Segoe UI">Segoe UI</option>
+              <option value="Cambria">Cambria</option>
+              <option value="Georgia">Georgia</option>
+              <option value="Gentium Plus">Gentium Plus</option>
+              <option value="Arial">Arial</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <div class="section-header-inline">
+            <div>
+              <h3>Choose Visible Scripts in Input &amp; Output Dropdowns</h3>
+              <p class="subtext">Select which scripts appear in your Input and Output boxes.</p>
+            </div>
+            <div class="quick-select-btns">
+              <button type="button" id="selectAllScriptsBtn" class="btn-secondary">Select All 17</button>
+              <button type="button" id="resetDefaultScriptsBtn" class="btn-secondary">Reset Defaults</button>
+            </div>
+          </div>
+
+          <div class="scripts-grid-container">
+            <div class="script-checklist-col">
+              <h4>Input Box Scripts</h4>
+              <div id="inputScriptsChecklist" class="checklist-box"></div>
+            </div>
+            <div class="script-checklist-col">
+              <h4>Output Box Scripts</h4>
+              <div id="outputScriptsChecklist" class="checklist-box"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" id="saveSettingsBtn" class="btn-primary">Apply &amp; Close</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="mapModal" class="modal-backdrop hidden">
+    <div class="modal-card modal-lg">
+      <div class="modal-header">
+        <h2 id="mapModalTitle">Transliteration Character Map</h2>
+        <button type="button" class="modal-close" data-close="mapModal">&#x2715;</button>
+      </div>
+      <div class="modal-body">
+        <div class="letter-map">
+          <h4>Vowels</h4>
+          <div id="m-vowels" class="map-grid"></div>
+          <h4>Other Marks (Anusv&#x0101;ra, Visarga, Candrabindu)</h4>
+          <div id="m-other_marks" class="map-grid"></div>
+          <h4>Consonants</h4>
+          <div id="m-consonants" class="map-grid"></div>
+          <h4>Numbers &amp; Symbols</h4>
+          <div id="m-symbols" class="map-grid"></div>
+          <h4>Additional Characters</h4>
+          <div id="m-other" class="map-grid"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div id="helpModal" class="modal-backdrop hidden">
+    <div class="modal-card modal-lg">
+      <div class="modal-header">
+        <h2>User Guide &amp; Feature Reference</h2>
+        <button type="button" class="modal-close" data-close="helpModal">&#x2715;</button>
+      </div>
+      <div class="modal-body guide-content">
+
+        <div class="guide-section">
+          <h3>1. Quick Overview &amp; Supported Scripts</h3>
+          <p>The <strong>Offline Transliteration Tool</strong> converts text between <strong>17 Indian and Roman scripts</strong> completely offline: <em>Devanagari, IAST, ITRANS, Bengali, Odia (Oriya), Gujarati, Gurmukhi, Kannada, Malayalam, Tamil, Telugu, Harvard-Kyoto (HK), SLP1, Velthuis, WX, Kolkata (National Library), and ITRANS (Dravidian)</em>.</p>
+        </div>
+
+        <div class="guide-section">
+          <h3>2. Top Header &amp; Workspace Controls</h3>
+          <ul class="guide-list">
+            <li><strong>Live Typing (Toggle):</strong> When checked, the Output box updates automatically as you type or paste. Uncheck it when working with very large documents to transliterate manually using the green <strong>&#x27A0; Run</strong> button in the center.</li>
+            <li><strong>Sync Scroll (Toggle):</strong> Locks the vertical scrollbars of the Input and Output boxes together so parallel verses stay aligned as you scroll.</li>
+            <li><strong>Font Size (<code>A-</code> / <code>A+</code>):</strong> Adjusts the workspace text size between <code>12px</code> and <code>36px</code>. Also scales the font size used when copying rich text into Microsoft Word.</li>
+            <li><strong>Character Map:</strong> Opens a side-by-side visual lookup chart for Vowels, Marks, Consonants, and Symbols between your currently selected Input and Output scripts.</li>
+            <li><strong>Swap Button (<code>&#x21C4;</code> in Center):</strong> Swaps the active Input and Output scripts along with their text boxes for instant reverse transliteration.</li>
+            <li><strong>Paste / Clear / Copy:</strong> Quickly paste clipboard text into Input, clear both panes, or copy the text. The green <strong>Copy</strong> buttons export both plain text and <strong>Microsoft Word Rich Text</strong> (preserving your chosen Indic and Roman fonts).</li>
+            <li><strong>Save .txt:</strong> Opens a Windows <em>Save As</em> dialog to save your transliterated output as a UTF-8 <code>.txt</code> file.</li>
+            <li><strong>Search (<code>Ctrl + F</code>):</strong> Press <code>Ctrl + F</code> anywhere in the app to search and highlight words across your Input and Output panes.</li>
+          </ul>
+        </div>
+
+        <div class="guide-section">
+          <h3>3. Dual-Script Output (Interleaved Stanzas or Lines)</h3>
+          <p>You can generate two output scripts simultaneously—ideal for study books, stotra handouts, and bilingual proofreading:</p>
+          <ul class="guide-list">
+            <li><strong>Preset (Devanagari + IAST):</strong> Select <code>Devanagari + IAST</code> directly in the Output dropdown.</li>
+            <li><strong>Custom (+ 2nd Script):</strong> Check the <code>+ 2nd Script:</code> box in the Output toolbar and pick any of the 17 scripts from the secondary dropdown (for example, <em>Odia + IAST</em> or <em>Devanagari + Malayalam</em>).</li>
+          </ul>
+        </div>
+
+        <div class="guide-section">
+          <h3>4. Settings &amp; Preferences Explained (Gear Icon &#x2699;)</h3>
+          <ul class="guide-list">
+            <li><strong>Display 'Auto-Detect Script' in Input Box:</strong> When set to <em>Yes</em>, adds an <code>Auto-Detect Script</code> option to the Input dropdown that automatically identifies whether pasted text is Devanagari, Bengali, Odia, IAST, ITRANS, SLP1, etc., and displays a badge showing the detected script.</li>
+            <li><strong>Devanagari / Indic Ending Mode (Schwa Syncope):</strong>
+              <ul>
+                <li><em>Sanskrit Style (Default):</em> Final consonants without a vowel retain an explicit vir&#x0101;ma/halant (e.g., <code>ajay</code> &#x2794; <code>&#x0905;&#x091C;&#x092F;&#x094D;</code>, <code>rAm</code> &#x2794; <code>&#x0930;&#x093E;&#x092E;&#x094D;</code>).</li>
+                <li><em>Hindi / Marathi Style:</em> Applies schwa syncope so final consonants drop the vir&#x0101;ma (e.g., <code>ajay</code> &#x2794; <code>&#x0905;&#x091C;&#x092F;</code>, <code>rAm</code> &#x2794; <code>&#x0930;&#x093E;&#x092E;</code>).</li>
+              </ul>
+            </li>
+            <li><strong>Dual-Script Output Grouping:</strong>
+              <ul>
+                <li><em>Stanza-by-Stanza (Default):</em> Groups paragraphs separated by a blank line—printing the full stanza in the 1st script followed immediately by the full stanza in the 2nd script.</li>
+                <li><em>Line-by-Line:</em> Interleaves every single line in the 1st script with its corresponding line in the 2nd script.</li>
+              </ul>
+            </li>
+            <li><strong>Word Export &amp; Rich-Text Copy Fonts:</strong> Select your preferred font for <strong>Brahmic / Indic Scripts</strong> (e.g., <em>Mangal, Nirmala UI, Siddhanta, Sanskrit 2003</em>) and <strong>Roman / Diacritic Scripts</strong> (e.g., <em>Calibri, Times New Roman, Gentium Plus</em>). When you click <strong>Copy</strong> and paste into Microsoft Word, each line is automatically formatted with the matching font!</li>
+            <li><strong>Choose Visible Scripts:</strong> Customize which of the 17 scripts appear in your Input and Output dropdown menus to keep your workspace clutter-free. Use <em>Select All 17</em> or <em>Reset Defaults</em> anytime.</li>
+          </ul>
+        </div>
+
+        <div class="guide-section">
+          <h3>5. Special Transliteration Syntax &amp; Escape Rules</h3>
+          <p><strong>1. Pause Transliteration (<code>##</code>):</strong> Type <code>##</code> to disable transliteration for a phrase and <code>##</code> again to resume:</p>
+          <div class="example-box"><code>bhagavad ##(divine one)## gItA</code> &#x2794; &#x092D;&#x0917;&#x0935;&#x0926;&#x094D; (divine one) &#x0917;&#x0940;&#x0924;&#x093E;</div>
+
+          <p><strong>2. Escape a Single Character (<code>\</code>):</strong> Place <code>\</code> before any character in ITRANS to keep it untransliterated:</p>
+          <div class="example-box"><code>bhagavad . gItA\.</code> &#x2794; &#x092D;&#x0917;&#x0935;&#x0926;&#x094D; &#x0964; &#x0917;&#x0940;&#x0924;&#x093E;.</div>
+
+          <p><strong>3. Break Up Conjunct Consonants (<code>{}</code> or <code>_</code>):</strong> In ITRANS, use <code>{}</code> for a zero-width joiner or <code>_</code> to separate adjacent vowels:</p>
+          <div class="example-box">
+            <code>kShetra</code> vs <code>k{}Shetra</code> &#x2794; &#x0915;&#x094D;&#x0937;&#x0947;&#x0924;&#x094D;&#x0930; vs &#x0915;&#x094D;&#x200D;&#x0937;&#x0947;&#x0924;&#x094D;&#x0930;<br>
+            <code>barau</code> vs <code>bara_u</code> &#x2794; &#x092C;&#x0930;&#x094C; vs &#x092C;&#x0930;&#x0909;
+          </div>
+
+          <p><strong>4. Force Vir&#x0101;ma (<code>.h</code>):</strong> In ITRANS, typing <code>.h</code> after a consonant explicitly marks a vir&#x0101;ma (&#x094D;).</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  
+  <script src="js/sanscript.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

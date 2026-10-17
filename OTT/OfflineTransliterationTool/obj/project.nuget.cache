@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "fhRWdcv3CIA=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\adhyatma\\Documents\\Digital Library\\Sanskrit_Books\\Sanscript Off-line\\OTT\\OfflineTransliterationTool\\OfflineTransliterationTool.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\adhyatma\\.nuget\\packages\\microsoft.net.illink.tasks\\8.0.32\\microsoft.net.illink.tasks.8.0.32.nupkg.sha512",
+    "C:\\Users\\adhyatma\\.nuget\\packages\\microsoft.web.webview2\\1.0.2903.40\\microsoft.web.webview2.1.0.2903.40.nupkg.sha512"
+  ],
+  "logs": []
+}

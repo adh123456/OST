@@ -1,0 +1,22 @@
+C:\Users\adhyatma\Documents\Digital Library\Sanskrit_Books\Sanscript Off-line\OTT\OfflineTransliterationTool\bin\Release\net8.0-windows\win-x64\runtimes\win-x64\native\WebView2Loader.dll
+C:\Users\adhyatma\Documents\Digital Library\Sanskrit_Books\Sanscript Off-line\OTT\OfflineTransliterationTool\bin\Release\net8.0-windows\win-x64\Offline Transliteration Tool.exe
+C:\Users\adhyatma\Documents\Digital Library\Sanskrit_Books\Sanscript Off-line\OTT\OfflineTransliterationTool\bin\Release\net8.0-windows\win-x64\Offline Transliteration Tool.deps.json
+C:\Users\adhyatma\Documents\Digital Library\Sanskrit_Books\Sanscript Off-line\OTT\OfflineTransliterationTool\bin\Release\net8.0-windows\win-x64\Offline Transliteration Tool.runtimeconfig.json
+C:\Users\adhyatma\Documents\Digital Library\Sanskrit_Books\Sanscript Off-line\OTT\OfflineTransliterationTool\bin\Release\net8.0-windows\win-x64\Offline Transliteration Tool.dll
+C:\Users\adhyatma\Documents\Digital Library\Sanskrit_Books\Sanscript Off-line\OTT\OfflineTransliterationTool\bin\Release\net8.0-windows\win-x64\WebView2Loader.dll
+C:\Users\adhyatma\Documents\Digital Library\Sanskrit_Books\Sanscript Off-line\OTT\OfflineTransliterationTool\bin\Release\net8.0-windows\win-x64\Microsoft.Web.WebView2.Core.dll
+C:\Users\adhyatma\Documents\Digital Library\Sanskrit_Books\Sanscript Off-line\OTT\OfflineTransliterationTool\bin\Release\net8.0-windows\win-x64\Microsoft.Web.WebView2.WinForms.dll
+C:\Users\adhyatma\Documents\Digital Library\Sanskrit_Books\Sanscript Off-line\OTT\OfflineTransliterationTool\bin\Release\net8.0-windows\win-x64\Microsoft.Web.WebView2.Wpf.dll
+C:\Users\adhyatma\Documents\Digital Library\Sanskrit_Books\Sanscript Off-line\OTT\OfflineTransliterationTool\bin\Release\net8.0-windows\win-x64\Microsoft.Web.WebView2.Core.xml
+C:\Users\adhyatma\Documents\Digital Library\Sanskrit_Books\Sanscript Off-line\OTT\OfflineTransliterationTool\bin\Release\net8.0-windows\win-x64\Microsoft.Web.WebView2.WinForms.xml
+C:\Users\adhyatma\Documents\Digital Library\Sanskrit_Books\Sanscript Off-line\OTT\OfflineTransliterationTool\bin\Release\net8.0-windows\win-x64\Microsoft.Web.WebView2.Wpf.xml
+C:\Users\adhyatma\Documents\Digital Library\Sanskrit_Books\Sanscript Off-line\OTT\OfflineTransliterationTool\obj\Release\net8.0-windows\win-x64\OfflineTransliterationTool.csproj.AssemblyReference.cache
+C:\Users\adhyatma\Documents\Digital Library\Sanskrit_Books\Sanscript Off-line\OTT\OfflineTransliterationTool\obj\Release\net8.0-windows\win-x64\OfflineTransliterationTool.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\adhyatma\Documents\Digital Library\Sanskrit_Books\Sanscript Off-line\OTT\OfflineTransliterationTool\obj\Release\net8.0-windows\win-x64\OfflineTransliterationTool.AssemblyInfoInputs.cache
+C:\Users\adhyatma\Documents\Digital Library\Sanskrit_Books\Sanscript Off-line\OTT\OfflineTransliterationTool\obj\Release\net8.0-windows\win-x64\OfflineTransliterationTool.AssemblyInfo.cs
+C:\Users\adhyatma\Documents\Digital Library\Sanskrit_Books\Sanscript Off-line\OTT\OfflineTransliterationTool\obj\Release\net8.0-windows\win-x64\OfflineTransliterationTool.csproj.CoreCompileInputs.cache
+C:\Users\adhyatma\Documents\Digital Library\Sanskrit_Books\Sanscript Off-line\OTT\OfflineTransliterationTool\obj\Release\net8.0-windows\win-x64\OfflineT.4DFE2D07.Up2Date
+C:\Users\adhyatma\Documents\Digital Library\Sanskrit_Books\Sanscript Off-line\OTT\OfflineTransliterationTool\obj\Release\net8.0-windows\win-x64\Offline Transliteration Tool.dll
+C:\Users\adhyatma\Documents\Digital Library\Sanskrit_Books\Sanscript Off-line\OTT\OfflineTransliterationTool\obj\Release\net8.0-windows\win-x64\refint\Offline Transliteration Tool.dll
+C:\Users\adhyatma\Documents\Digital Library\Sanskrit_Books\Sanscript Off-line\OTT\OfflineTransliterationTool\obj\Release\net8.0-windows\win-x64\OfflineTransliterationTool.genruntimeconfig.cache
+C:\Users\adhyatma\Documents\Digital Library\Sanskrit_Books\Sanscript Off-line\OTT\OfflineTransliterationTool\obj\Release\net8.0-windows\win-x64\ref\Offline Transliteration Tool.dll
