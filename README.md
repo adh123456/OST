@@ -1,2 +1,2 @@
-# OST
-Offline Sanskrit Transliterator
+# OTT
+Offline Transliteration Tool
